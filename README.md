@@ -24,17 +24,17 @@ The backend and frontend are developed independently and connected through an AP
 
 ### Clone the repository
 
-#Run this in Bash
+####Run this in Bash
 
 git clone git@github.com:Silverdragon977/django-next-docker-app.git
 cd django-next-docker-app
 
-# Optionally you can run 
+#### Optionally you can run 
 bash SetupURLAndStartContainer.sh 
-# This will add the Host django-app.test:8002 url to your etc/hosts file
-# and then run the containers in the background and open the url in default browser
+#### This will add the Host django-app.test:8002 url to your etc/hosts file
+#### and then run the containers in the background and open the url in default browser
 
-# Otherwise run the container in the directory
+#### Otherwise run the container in the directory
 docker compose up --build
-# To stop container
+#### To stop container
 docker compose down
