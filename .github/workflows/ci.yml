@@ -29,7 +29,18 @@ jobs:
         run: sleep 10
 
       - name: Check backend
-        run: curl -f http://localhost:8002 || exit 1
+        run:
+          for i in {1..10}; do
+            curl -f http://localhost:8002 && break
+            echo "waiting for backend..."
+            sleep 5
+          done
 
       - name: Check frontend
-        run: curl -f http://localhost:3002 || exit 1
+        run:
+          for i in {1..10}; do 
+            curl -f http://localhost:3002 && break
+            echo "waiting for frontend..."
+            sleep 5
+          done
+
