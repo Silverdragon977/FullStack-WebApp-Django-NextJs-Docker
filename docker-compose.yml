@@ -1,0 +1,18 @@
+services:
+  backend:
+    container_name: django_backend
+    build: ./backend
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8002:8000"
+
+  frontend:
+    container_name: next_frontend
+    build: ./frontend
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3002:3000"
