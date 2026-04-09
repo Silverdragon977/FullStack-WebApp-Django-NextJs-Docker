@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - '**'
+  pull_request:
+    branches:
+      - main
+  concurrency:
+    group: ci-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Build Docker containers
+        run: docker compose build
+
+      - name: Start services
+        run: docker compose up -d
+
+      - name: Wait for services
+        run: sleep 10
+
+      - name: Check backend
+        run: curl -f http://localhost:8002 || exit 1
+
+      - name: Check frontend
+        run: curl -f http://localhost:3002 || exit 1
