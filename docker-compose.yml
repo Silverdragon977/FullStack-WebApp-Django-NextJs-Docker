@@ -1,7 +1,5 @@
 services:
   backend:
-    env_file:
-      - ./backend/.env
     container_name: django_backend
     build: ./backend
     restart: unless-stopped
@@ -11,12 +9,13 @@ services:
       - "8002:8000"
 
   frontend:
-    env_file:
-      - ./frontend/.env
     container_name: next_frontend
     build: ./frontend
     restart: unless-stopped
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     ports:
       - "3002:3000"
+    depends_on: 
+      - backend
